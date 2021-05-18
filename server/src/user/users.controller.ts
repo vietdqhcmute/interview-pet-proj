@@ -44,6 +44,6 @@ export class UsersController {
       response.status(HttpStatus.BAD_REQUEST).send('User not found');
     }
     const user = await this.userService.findByUserId(loginResult.userId);
-    response.status(HttpStatus.FOUND).json({ result: user });
+    response.status(HttpStatus.OK).json({ result: user });
   }
 }
