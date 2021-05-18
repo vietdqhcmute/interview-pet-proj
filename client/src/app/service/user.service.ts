@@ -8,23 +8,25 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class UserService {
-   private currentUserSubject: BehaviorSubject<any>;
+  private currentUserSubject: BehaviorSubject<any>;
 
-  constructor(private router: Router,
+  constructor(private router: Router, 
               private http: HttpClient) {
-         this.currentUserSubject = new BehaviorSubject({});
-       
+                this.currentUserSubject = new BehaviorSubject({});
   }
   public currentUserValue() {
     return this.currentUserSubject.value;
   }
 
   public login(email: String, password: String) {
-    return this.http.post('http://localhost:9000/users/login', { email, password }).pipe(map(user =>{
-      localStorage.setItem('currentUser', JSON.stringify(user));
-      this.currentUserSubject.next(user);
-      return user;
-    }));
+    return this.http
+      .post('http://localhost:9000/users/login', { email, password })
+      .pipe(
+        map((user) => {
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          this.currentUserSubject.next(user);
+          return user;
+        })
+      );
   }
-
 }

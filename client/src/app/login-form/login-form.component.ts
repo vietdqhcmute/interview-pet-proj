@@ -36,7 +36,6 @@ export class LoginFormComponent implements OnInit {
       console.log("login fail");
       return;
     }
-    this.loading;
    
     this.userService.login(this.f.email.value, this.f.password.value).pipe(first()).subscribe(data => {
       console.log("login success", data);
